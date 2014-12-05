@@ -1,0 +1,11 @@
+box: wercker/rvm
+build:
+  steps:
+    - script:
+        name: Check stuff out
+        code: |
+          uptime
+          free -m
+          cat /proc/cpuinfo
+          cat /proc/cpuinfo | grep "physical id"
+          df -h
