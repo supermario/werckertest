@@ -5,11 +5,21 @@ type: service
 platform: ubuntu@12.04
 description: werckertest
 keywords:
+  - chef
   - postgresql
-  - postgresql9.3
 packages:
+  - chef@10.18.2
   - postgresql@9.3
 script: |
+  sudo apt-get update
+  sudo apt-get install -yq wget curl
+  export CHEF_DEB=chef_10.18.2-2.ubuntu.11.04_amd64.deb
+  cd
+  wget https://opscode-omnitruck-release.s3.amazonaws.com/ubuntu/11.04/x86_64/$CHEF_DEB
+  sudo dpkg -i $CHEF_DEB
+  chef-solo -v
+  rm $CHEF_DEB
+
   # Remove previous postgres files
   rm -rf  /etc/postgresql
   rm -rf /etc/postgresql-common
